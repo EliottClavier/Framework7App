@@ -1,0 +1,31 @@
+{
+  "cwd": "E:\\Users\\Eliott Clavier\\Desktop\\Le bureau du bureau\\Ecole\\Projets\\projetCordova\\Framework7App",
+  "type": [
+    "cordova"
+  ],
+  "name": "Framework7App",
+  "framework": "core",
+  "template": "tabs",
+  "bundler": false,
+  "cssPreProcessor": false,
+  "theming": {
+    "customColor": true,
+    "color": "#007aff",
+    "darkTheme": false,
+    "iconFonts": true,
+    "fillBars": true
+  },
+  "customBuild": false,
+  "pkg": "io.framework7.myapp",
+  "cordova": {
+    "folder": "cordova",
+    "platforms": [
+      "android"
+    ],
+    "plugins": [
+      "cordova-plugin-statusbar",
+      "cordova-plugin-keyboard",
+      "cordova-plugin-splashscreen"
+    ]
+  }
+}
