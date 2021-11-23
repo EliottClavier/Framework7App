@@ -39,6 +39,6 @@ cordova/platforms/
 cordova/plugins/
 cordova/www/
 
-
+package-lock.json
 
 
