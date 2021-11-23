@@ -5,10 +5,10 @@
 
 /* Custom color theme properties */
 :root {
-  --f7-theme-color: #007aff;
-  --f7-theme-color-rgb: 0, 122, 255;
-  --f7-theme-color-shade: #0066d6;
-  --f7-theme-color-tint: #298fff;
+  --f7-theme-color: #1b1b3a;
+  --f7-theme-color-rgb: 27, 27, 58;
+  --f7-theme-color-shade: #272753;
+  --f7-theme-color-tint: #2e2e61;
 }
 
 /* Invert navigation bars to fill style */
