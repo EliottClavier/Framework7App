@@ -1,37 +1,31 @@
-
-<div class="page" data-name="profile">
-    
-    <div class="navbar">
-        <div class="navbar-bg"></div>
-        <div class="navbar-inner">
-          <div class="title">Profil</div>
+<template>
+    <div class="page" data-name="profile">
+        <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner">
+                <div class="title">Profil</div>
+            </div>
         </div>
-    </div>
-    <div style="height: 10vh;"></div>
-    <div style="display: flex; justify-content: center">
-        <div style="display: flex;">
-            <img style="width: 5rem; border-radius: 50%;" src="https://media-exp1.licdn.com/dms/image/C4D03AQEDHqHPFmKTmA/profile-displayphoto-shrink_200_200/0/1571245330110?e=1643241600&v=beta&t=sW0X8Tfo-tBstTd65dSy6ybJkwWcZt9xYrAxowidemQ" alt="">
-            <div style="margin-left: 1rem; margin-top: 1rem; font-size: 2rem;">Chabin Florent</div>
+        <div style="height: 10vh;"></div>
+        <div style="display: flex; justify-content: center">
+            <div style="display: flex;">
+                <div style="width: 100%; height:auto; background-image: url(${img}); background-position: center; background-repeat: no-repeat; background-size: cover; border-radius: 50%;"></div>
+                <div style="margin-left: 1rem; margin-top: 1rem; font-size: 2rem;">Chabin Florent</div>
+            </div>
         </div>
+        <button class="button" @click=${logout}>
+            Se déconnecter
+        </button>
     </div>
-    <button class="button" @click="">
-        Se déconnecter
-    </button>
-    
-</div>
+</template>
 <script>
-    import * as firebase from "firebase";
-    import "firebase/auth";
+    export default (props, {$store}) => {
+        const logout = () => {
+            console.log("logout");
+        }
+        const img = 'https://media-exp1.licdn.com/dms/image/C4D03AQEDHqHPFmKTmA/profile-displayphoto-shrink_200_200/0/1571245330110?e=1643241600&v=beta&t=sW0X8Tfo-tBstTd65dSy6ybJkwWcZt9xYrAxowidemQ'
 
-    const config = {
-    apiKey: "AIzaSyBUysS3WkmXz1viEiVammweuXXjRIM2fBA",
-    authDomain: "b3recetteapp.web.app",
-    }
-
-    const firebaseApp = firebase.initializeApp(config);
-
-    firebase.auth().onAuthStateChanged((user) => {
-        this.user = user;
-    })
+        return $render;
+    };
 </script>
 
