@@ -2,11 +2,23 @@
 var routes = [
   {
     path: '/',
-    url: './index.html',
+    url: './index.html',  
   },
   {
     path: '/about/',
     url: './pages/about.html',
+  },
+  {
+    path: '/shop',
+    url: './pages/shop.html',
+  },
+  {
+    path: '/basket',
+    url: './pages/basket.html',
+  },
+  {
+    path: '/profile',
+    url: './pages/profile.html',
   },
   {
     path: '/request-and-load/user/:userId/',

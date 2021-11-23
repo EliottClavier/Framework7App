@@ -24,11 +24,26 @@
 </head>
 <body>
   <div id="app">
-    <h1>Hello World!</h1>
-    <div class="page-content">
-      <p>Page content goes here</p>
-      <!-- Link to another page -->
-      <a href="/about/">About app</a>
+    
+    <div class="view view-main">
+      <div data-name="home" class="page">
+        <div class="navbar">
+          <div class="navbar-bg"></div>
+          <div class="navbar-inner">
+            <div class="title">Market App</div>
+          </div>
+        </div>
+        <h1>Page d'accueil</h1>
+      </div>
+      
+      <div class="toolbar toolbar-bottom">
+        <div class="toolbar-inner">
+          <a href="/" class="link">Accueil</a>
+          <a href="/shop" class="link">Recettes</a>
+          <a href="/basket" class="link">Wish List</a>
+          <a href="/profile" class="link">Profil</a>
+        </div>
+      </div>
     </div>
   </div>
   <!-- CORDOVA_PLACEHOLDER_DONT_REMOVE -->
