@@ -65,15 +65,7 @@ const searchDisplay = async() => {
     meals.map(meal => (
             
       `
-      <div class="searchContainer">
-        <h2>${meal.strMeal}</h2>
-        <div class="infos">
-          <div>origin : ${meal.strArea}</div>
-          <div>category : ${meal.strCategory}</div>
-        </div>
-        <img src='${meal.strMealThumb}' /></br>
-        <a href="${meal.strYoutube}" target="_blank"><i class="fab fa-youtube"></i></a>
-      </div>
+      
       `
     )).join('')
   );
@@ -97,8 +89,8 @@ const randomMealDisplay = async() => {
         <div class="randomContainer">
           <h2>${meal.strMeal}</h2>
           <div class="infos">
-            <div>origin : ${meal.strArea}</div>
-            <div>catégory : ${meal.strCategory}</div>
+            <div></div>
+            <div>${meal.strCategory}</div>
           </div>
           <img src='${meal.strMealThumb}' />
           <p>${meal.strInstructions}</p>
