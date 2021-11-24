@@ -15,7 +15,7 @@
                     <div style="display: flex; justify-content: space-between;">
                         <h2 style="margin: 1em"><i class="icon f7-icons color-black">poultry_leg</i><span style="margin-left: 1em">Ingrédients</span></h2>
                         <h2 style="margin: 1em"><i class="icon f7-icons color-red" @click=${addFav}>${fav ? `heart_fill` : `heart`}</i></h2>
-                       
+
                     </div>
                     <hr />
                     <ul class="categories-list">
@@ -49,7 +49,7 @@
     </div>
 </template>
 <script>
-  export default (props, {$store}) => {
+  export default (props, {$store, $update}) => {
     let recipe = props.recipe;
     let i = 1;
     let ingredients = [];
@@ -63,7 +63,7 @@
     const addFav = () => {
         $store.dispatch('addRecipe', recipe);
         fav = !fav;
-        console.log(fav)
+        $update();
     }
 
     return $render;
