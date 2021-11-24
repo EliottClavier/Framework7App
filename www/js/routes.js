@@ -4,7 +4,7 @@ var routes = [
     url: './index.html',
   },
   {
-    path: '/recipes',
+    path: '/recipes/letter',
     async: function ({ router, to, resolve }) {
       // App instance
       var app = router.app;
@@ -22,7 +22,7 @@ var routes = [
     }
   },
   {
-    path: '/recipes/:letter',
+    path: '/recipes/letter/:letter',
     async: async function ({ router, to, resolve }) {
       var app = router.app;
       app.preloader.show();

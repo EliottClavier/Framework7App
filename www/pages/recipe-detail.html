@@ -8,7 +8,7 @@
                     <h2 style="left: 2vw; top: 12vw; position: absolute; margin: 0">
                         <em>${recipe.strCategory}</em>
                     </h2>
-                    <a href="/recipes/${lastLetter}" style="right: 2vh; top: 2vh; position: absolute; margin: 0"><i class="icon f7-icons color-black">multiply_circle_fill</i></a>
+                    <a class="back" style="right: 2vh; top: 2vh; position: absolute; margin: 0"><i class="icon f7-icons color-black">multiply_circle_fill</i></a>
                 </div>
 
                 <div>
@@ -49,7 +49,7 @@
     </div>
 </template>
 <script>
-  export default (props, {$store, $update}) => {
+  export default (props, {$store, $update, $router}) => {
 
     const formatIngredientMeasure = (recipe) => {
       let array = [];
@@ -61,7 +61,6 @@
       return array;
     }
     let fav = false;
-    const lastLetter = $store.getters.lastLetter.value;
     const newRecipe = (recipe) => recipe === recipe
     const already = $store.getters.recipes.value.findIndex(newRecipe);
     if(already != -1){
