@@ -6,14 +6,14 @@ const store = createStore({
     recipes: []
   },
   getters: {
-    products({ state }) {
+    recipes({ state }) {
       return state.recipes;
     }
   },
   actions: {
     addProduct({ state }, recipe) {
       state.recipes = [...state.recipes, recipe];
-    },
+    }
   },
 })
 

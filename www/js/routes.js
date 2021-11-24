@@ -14,7 +14,18 @@ var routes = [
   },
   {
     path: '/basket',
-    url: './pages/basket.html',
+    async: function ({ router, to, resolve }) {
+      // App instance
+      var app = router.app;
+      // Show Preloader
+      app.preloader.show();
+      // Hide Preloader
+      app.preloader.hide();
+
+      resolve({
+          componentUrl: "./pages/basket.html",
+      });
+    },
   },
   {
     path: '/profile',
