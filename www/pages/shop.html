@@ -17,12 +17,21 @@
           <div class="swiper-wrapper">
             ${letters.map((letter) => $h`
             <div class="swiper-slide">
-              <a
-                href="/shop/${letter}"
-                style="padding: 1em; font-size: 1em"
-                class="badge"
-                >${letter}</a
-              >
+              ${(paramLetter === letter) ? $h`
+                <a
+                  href="/shop/${letter}"
+                  style="padding: 1em; font-size: 1em"
+                  class="badge color-blue">
+                  ${letter}
+                </a>
+              `: $h`
+                <a
+                  href="/shop/${letter}"
+                  style="padding: 1em; font-size: 1em"
+                  class="badge">
+                  ${letter}
+                </a>
+              `}
             </div>
             `)}
           </div>
@@ -33,7 +42,7 @@
       <div class="list media-list" style="margin: 0">
         <ul>
           <li>
-            <a href="#" class="item-link item-content" style="font-size: 1em">
+            <a href="/recipe/${recipe.idMeal}" class="item-link item-content" style="font-size: 1em">
               <div class="item-media">
                 <img src="${recipe.strMealThumb}" width="80" />
               </div>
@@ -59,9 +68,8 @@
 
 <script>
   export default (props, { $store }) => {
-    let recipes = props.recipes;
+    let { recipes, paramLetter } = props;
 
-    console.log(recipes);
     let letters = [
       "A",
       "B",

@@ -33,6 +33,7 @@ var routes = [
         },
         {
           props: {
+            paramLetter: to.params.letter,
             recipes: await getRecipesByLetter(to.params.letter)
           }
         });
