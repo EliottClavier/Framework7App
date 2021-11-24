@@ -50,15 +50,16 @@
 </template>
 <script>
   export default (props, {$store, $update}) => {
-    let recipe = props.recipe;
-    let i = 1;
-    let ingredients = [];
-    while (recipe['strIngredient' + i] && recipe['strMeasure' + i]) {
-      ingredients.push(recipe['strIngredient' + i] + ' - ' + recipe['strMeasure' + i])
-      i++;
-    }
 
-    let fav = false;
+    const formatIngredientMeasure = (recipe) => {
+      let array = [];
+      let i = 1;
+      while (recipe['strIngredient' + i] && recipe['strMeasure' + i]) {
+        array.push(recipe['strIngredient' + i] + ' - ' + recipe['strMeasure' + i])
+        i++;
+      }
+      return array;
+    }
 
     const newRecipe = (recipe) => recipe == recipe
     const already = $store.getters.recipes.value.findIndex(newRecipe);
@@ -68,10 +69,14 @@
     }
 
     const addFav = () => {
-        $store.dispatch('addRecipe', recipe);
-        fav = !fav;
-        $update();
+      $store.dispatch('addRecipe', recipe);
+      fav = !fav;
+      $update();
     }
+
+    let fav = false;
+    let recipe = props.recipe;
+    let ingredients = formatIngredientMeasure(recipe);
 
     return $render;
   };
