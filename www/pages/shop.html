@@ -1,13 +1,74 @@
-<div class="page" data-name="shop">
-  <div class="navbar">
-    <div class="navbar-bg"></div>
-    <div class="navbar-inner">
-      <div class="title">Recettes</div>
+<template>
+  <div class="page" data-name="recipe-detail">
+    <div class="page-content" style="padding-top: 0">
+      ${recipe && $h`
+      <div>
+        <img
+          data-src="${recipe.strMealThumb}"
+          class="lazy"
+          style="height: 40vh; width: 100vw; opacity: 0.7"
+        />
+        <h1 style="left: 2vw; top: 1vw; position: absolute; margin: 0">
+          ${recipe.strMeal}
+        </h1>
+        <h2 style="left: 2vw; top: 12vw; position: absolute; margin: 0">
+          <em>${recipe.strCategory}</em>
+        </h2>
+        <h1 style="right: 2vw; top: 1vw; position: absolute; margin: 0">
+          <i class="icon f7-icons color-black">multiply_circle_fill</i>
+        </h1>
+      </div>
+
+      <div>
+        <h2 style="margin: 1em">
+          <i class="icon f7-icons color-black">poultry_leg</i
+          ><span style="margin-left: 1em">Ingrédients</span>
+        </h2>
+        <hr />
+        <ul class="categories-list">
+          ${ingredients.map((ingredient) => $h`
+          <li class="badge color-gray" style="padding: 1.5em; margin: 0.5em">
+            <p style="font-size: 1.2rem">${ingredient}</p>
+          </li>
+          `)}
+        </ul>
+      </div>
+      <div>
+        <h2 style="margin: 1em">
+          <i class="icon f7-icons color-black">square_favorites_alt</i>
+          <span style="margin-left: 1em">Instructions</span>
+        </h2>
+        <hr />
+        ${recipe.strInstructions.split('.').map((text, i) => $h` ${text && $h`
+        <p style="margin: 1.5em; font-weight: bold">${i + 1}. ${text}.</p>
+        `} `)}
+      </div>
+      <div>
+        <h2 style="margin: 1em">
+          <i class="icon f7-icons color-black"
+            >arrowtriangle_right_square_fill</i
+          >
+          <span style="margin-left: 1em">Tutoriel vidéo</span>
+        </h2>
+        <hr />
+        <p style="margin: 1.5em; font-weight: bold">${recipe.strYoutube}</p>
+      </div>
+      `}
     </div>
   </div>
+</template>
+<script>
+  export default (props, { $store }) => {
+    let recipe = props.recipe;
+    let i = 1;
+    let ingredients = [];
+    while (recipe["strIngredient" + i] && recipe["strMeasure" + i]) {
+      ingredients.push(
+        recipe["strIngredient" + i] + " - " + recipe["strMeasure" + i]
+      );
+      i++;
+    }
 
-  <h1>Cooking for all</h1>
-  <input type="text" placeholder="Enter some food name" id="searchInput" />
-  <button id="randomMeal">Pick a random meal</button>
-  <div id="results"></div>
-</div>
+    return $render;
+  };
+</script>
