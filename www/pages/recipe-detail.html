@@ -1,0 +1,22 @@
+<template>
+    <div class="page" data-name="recipe-detail">
+<!--        <div class="navbar">-->
+<!--            <div class="navbar-bg"></div>-->
+<!--            <div class="navbar-inner">-->
+<!--                <div class="title">Détail recette</div>-->
+<!--            </div>-->
+<!--        </div>-->
+        <div class="page-content">
+            ${recipe && $h`
+                <h1>${recipe.strMeal}</h1>
+                <img data-src="${recipe.strMealThumb}" class="lazy" />
+            `}
+        </div>
+    </div>
+</template>
+<script>
+  export default (props, {$store}) => {
+    let recipe = props.recipe;
+    return $render;
+  };
+</script>
