@@ -1,9 +1,38 @@
-
-<div class="page" data-name="basket">
+<template>
+  <div class="page" data-name="basket">
     <div class="navbar">
-        <div class="navbar-bg"></div>
-        <div class="navbar-inner">
-          <div class="title">Wish List</div>
-        </div>
+      <div class="navbar-bg"></div>
+      <div class="navbar-inner">
+        <div class="title">Favoris</div>
       </div>
-</div>
+    </div>
+    <div class="page-content">
+      ${recipes.value.length > 0 ? $h`
+        <div class="list">
+          <ul>
+            ${recipes.value.map((recipe) => $h`
+              <li class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">
+                    ${recipe.name}
+                  </div>
+                </div>
+              </li>
+              `)}
+          </ul>
+        </div>
+        ` : $h`
+        <div style="font-size: 3rem; text-align: center;">Pas de favoris</div>
+        <a class="button" href="/shop">Retour à la liste des recettes</a>
+        
+        `}
+    </div>
+
+  </div>
+</template>
+<script>
+  export default(props, {$store, $on}) => {
+    const recipes = $store.getters.recipes;
+    return $render;
+  }
+</script>
