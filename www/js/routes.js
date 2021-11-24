@@ -4,10 +4,6 @@ var routes = [
     url: './index.html',
   },
   {
-    path: '/about/',
-    url: './pages/about.html',
-  },
-  {
     path: '/shop',
     url: './pages/shop.html',
   },
