@@ -6,14 +6,22 @@ const store = createStore({
     recipes: []
   },
   getters: {
-    products({ state }) {
+    recipes({ state }) {
       return state.recipes;
     }
   },
   actions: {
-    addProduct({ state }, recipe) {
-      state.recipes = [...state.recipes, recipe];
-    },
+    addRecipe({ state }, recipe) {
+
+      const newRecipe = (recipe) => recipe == recipe
+      const already = state.recipes.findIndex(newRecipe);
+      if(already != -1){
+        state.recipes = state.recipes.splice(0, already);
+      }else{
+        state.recipes = [...state.recipes, recipe];
+      }
+
+    }
   },
 })
 

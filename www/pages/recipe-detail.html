@@ -8,11 +8,15 @@
                     <h2 style="left: 2vw; top: 12vw; position: absolute; margin: 0">
                         <em>${recipe.strCategory}</em>
                     </h2>
-                    <h1 style="right: 2vw; top: 1vw; position: absolute; margin: 0"><i class="icon f7-icons color-black">multiply_circle_fill</i></h1>
+                    <a href="/shop" style="right: 2vh; top: 2vh; position: absolute; margin: 0"><i class="icon f7-icons color-black">multiply_circle_fill</i></a>
                 </div>
 
                 <div>
-                    <h2 style="margin: 1em"><i class="icon f7-icons color-black">poultry_leg</i><span style="margin-left: 1em">Ingrédients</span></h2>
+                    <div style="display: flex; justify-content: space-between;">
+                        <h2 style="margin: 1em"><i class="icon f7-icons color-black">poultry_leg</i><span style="margin-left: 1em">Ingrédients</span></h2>
+                        <h2 style="margin: 1em"><i class="icon f7-icons color-red" @click=${addFav}>${fav ? `heart_fill` : `heart`}</i></h2>
+
+                    </div>
                     <hr />
                     <ul class="categories-list">
                         ${ingredients.map((ingredient) => $h`
@@ -45,14 +49,34 @@
     </div>
 </template>
 <script>
-  export default (props, {$store}) => {
-    let recipe = props.recipe;
-    let i = 1;
-    let ingredients = [];
-    while (recipe['strIngredient' + i] && recipe['strMeasure' + i]) {
-      ingredients.push(recipe['strIngredient' + i] + ' - ' + recipe['strMeasure' + i])
-      i++;
+  export default (props, {$store, $update}) => {
+
+    const formatIngredientMeasure = (recipe) => {
+      let array = [];
+      let i = 1;
+      while (recipe['strIngredient' + i] && recipe['strMeasure' + i]) {
+        array.push(recipe['strIngredient' + i] + ' - ' + recipe['strMeasure' + i])
+        i++;
+      }
+      return array;
     }
+
+    const newRecipe = (recipe) => recipe == recipe
+    const already = $store.getters.recipes.value.findIndex(newRecipe);
+    if(already != -1){
+        fav = true;
+        $update();
+    }
+
+    const addFav = () => {
+      $store.dispatch('addRecipe', recipe);
+      fav = !fav;
+      $update();
+    }
+
+    let fav = false;
+    let recipe = props.recipe;
+    let ingredients = formatIngredientMeasure(recipe);
 
     return $render;
   };
