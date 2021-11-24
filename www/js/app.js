@@ -37,9 +37,6 @@ var app = new Framework7({
   },
 });
 
-<<<<<<< HEAD
-var mainView = app.views.create(".view-main");
-=======
 var mainView = app.views.create('.view-main');
   
 const searchInput = document.getElementById('searchInput');
@@ -105,4 +102,3 @@ const randomMealDisplay = async() => {
 
 randomMeal.addEventListener('click', randomMealDisplay)
 randomMealDisplay();
->>>>>>> 328c755c5c27594e119dd515e16e197fc9774dd6
