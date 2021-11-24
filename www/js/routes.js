@@ -5,24 +5,50 @@ var routes = [
   },
   {
     path: '/shop',
-    url: './pages/shop.html',
+    async: function ({ router, to, resolve }) {
+      // App instance
+      var app = router.app;
+      // Show Preloader
+      app.preloader.show();
 
-    async: function () {
-      app.request({
-        url: "https://www.themealdb.com/api/json/v1/1/search.php?f=b",
-        method: "GET",
-        dataType: "json",
-        beforeSend: function () {
-          app.preloader.show();
-        },
-        success: function (data) {
-          app.preloader.hide();
-          for (let index = 0; index < 1; index++) {
-            console.log(data)
-            console.log(data.meals)
+      // Hide Preloader
+      app.preloader.hide();
+
+      resolve({
+        componentUrl: "./pages/shop.html",
+      },
+        {
+          props: {
+            recipes: []
           }
-        },
-      })
+        });
+    }
+  },
+  {
+    path: '/shop/:letter',
+    async: function ({ router, to, resolve }) {
+      // App instance
+      var app = router.app;
+      // Show Preloader
+      app.preloader.show();
+
+      // Hide Preloader
+      app.preloader.hide();
+
+      app.request.get(
+        `https://www.themealdb.com/api/json/v1/1/search.php?f=${to.params.letter}`
+      )
+        .then(r => {
+          let recipes = JSON.parse(r.data).meals;
+          resolve({
+            componentUrl: "./pages/shop.html",
+          },
+            {
+              props: {
+                recipes: recipes
+              }
+            });
+        });
     }
   },
   {
@@ -51,7 +77,8 @@ var routes = [
         .then(r => {
           let recipe = JSON.parse(r.data).meals[0];
           resolve({
-              componentUrl: "./pages/recipe-detail.html",},
+            componentUrl: "./pages/recipe-detail.html",
+          },
             {
               props: {
                 recipe: recipe
@@ -72,7 +99,7 @@ var routes = [
       app.preloader.hide();
 
       resolve({
-          componentUrl: "./pages/profile.html",
+        componentUrl: "./pages/profile.html",
       });
     },
   },
