@@ -4,7 +4,7 @@ var routes = [
     url: './index.html',
   },
   {
-    path: '/shop',
+    path: '/recipes',
     async: function ({ router, to, resolve }) {
       // App instance
       var app = router.app;
@@ -12,7 +12,7 @@ var routes = [
       app.preloader.hide();
 
       resolve({
-        componentUrl: "./pages/shop.html",
+        componentUrl: "./pages/recipes.html",
       },
         {
           props: {
@@ -22,14 +22,14 @@ var routes = [
     }
   },
   {
-    path: '/shop/:letter',
+    path: '/recipes/:letter',
     async: async function ({ router, to, resolve }) {
       var app = router.app;
       app.preloader.show();
       app.preloader.hide();
 
       resolve({
-          componentUrl: "./pages/shop.html",
+          componentUrl: "./pages/recipes.html",
         },
         {
           props: {
@@ -39,20 +39,16 @@ var routes = [
     }
   },
   {
-    path: '/basket',
+    path: '/favoris',
     async: function ({ router, to, resolve }) {
       var app = router.app;
       app.preloader.show();
       app.preloader.hide();
 
       resolve({
-          componentUrl: "./pages/basket.html",
+          componentUrl: "./pages/favoris.html",
       });
     },
-  },
-  {
-    path: '/profile',
-    url: './pages/profile.html',
   },
   {
     path: '/recipe/:recipeId',
@@ -69,18 +65,6 @@ var routes = [
           }
         });
     }
-  },
-  {
-    path: '/request-and-load/user/:userId/',
-    async: function ({ router, to, resolve }) {
-      var app = router.app;
-      app.preloader.show();
-      app.preloader.hide();
-
-      resolve({
-        componentUrl: "./pages/profile.html",
-      });
-    },
   },
   // Default route (404 page). MUST BE THE LAST
   {
