@@ -61,7 +61,7 @@
       return array;
     }
 
-    const newRecipe = (recipe) => recipe == recipe
+    const newRecipe = (recipe) => recipe === recipe
     const already = $store.getters.recipes.value.findIndex(newRecipe);
     if(already != -1){
         fav = true;
