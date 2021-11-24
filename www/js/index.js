@@ -13,3 +13,19 @@ const getRecipeById = async (id) => {
       }
   );
 };
+
+const getRecipesByLetter = async (letter) => {
+  // Requête GET
+  return await app.request.get(
+    `https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`
+  )
+    .then(
+      r => {
+        return JSON.parse(r.data).meals;
+      },
+      err => {
+        console.log(err);
+        return null;
+      }
+    );
+};

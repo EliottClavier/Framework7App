@@ -8,10 +8,7 @@ var routes = [
     async: function ({ router, to, resolve }) {
       // App instance
       var app = router.app;
-      // Show Preloader
       app.preloader.show();
-
-      // Hide Preloader
       app.preloader.hide();
 
       resolve({
@@ -26,39 +23,26 @@ var routes = [
   },
   {
     path: '/shop/:letter',
-    async: function ({ router, to, resolve }) {
-      // App instance
+    async: async function ({ router, to, resolve }) {
       var app = router.app;
-      // Show Preloader
       app.preloader.show();
-
-      // Hide Preloader
       app.preloader.hide();
 
-      app.request.get(
-        `https://www.themealdb.com/api/json/v1/1/search.php?f=${to.params.letter}`
-      )
-        .then(r => {
-          let recipes = JSON.parse(r.data).meals;
-          resolve({
-            componentUrl: "./pages/shop.html",
-          },
-            {
-              props: {
-                recipes: recipes
-              }
-            });
+      resolve({
+          componentUrl: "./pages/shop.html",
+        },
+        {
+          props: {
+            recipes: await getRecipesByLetter(to.params.letter)
+          }
         });
     }
   },
   {
     path: '/basket',
     async: function ({ router, to, resolve }) {
-      // App instance
       var app = router.app;
-      // Show Preloader
       app.preloader.show();
-      // Hide Preloader
       app.preloader.hide();
 
       resolve({
@@ -73,6 +57,10 @@ var routes = [
   {
     path: '/recipe/:recipeId',
     async: async function ({ router, to, resolve }) {
+      var app = router.app;
+      app.preloader.show();
+      app.preloader.hide();
+
       resolve({
           componentUrl: "./pages/recipe-detail.html",},
         {
@@ -85,12 +73,8 @@ var routes = [
   {
     path: '/request-and-load/user/:userId/',
     async: function ({ router, to, resolve }) {
-      // App instance
       var app = router.app;
-      // Show Preloader
       app.preloader.show();
-
-      // Hide Preloader
       app.preloader.hide();
 
       resolve({
