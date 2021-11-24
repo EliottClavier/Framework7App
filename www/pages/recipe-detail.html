@@ -60,6 +60,7 @@
       }
       return array;
     }
+    let fav = false;
 
     const newRecipe = (recipe) => recipe == recipe
     const already = $store.getters.recipes.value.findIndex(newRecipe);
@@ -74,7 +75,6 @@
       $update();
     }
 
-    let fav = false;
     let recipe = props.recipe;
     let ingredients = formatIngredientMeasure(recipe);
 
