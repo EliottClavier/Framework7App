@@ -12,7 +12,7 @@ var routes = [
       app.preloader.hide();
 
       resolve({
-        componentUrl: "./pages/recipes.html",
+        componentUrl: "./pages/recipes/letter/search.html",
       },
         {
           props: {
@@ -29,12 +29,48 @@ var routes = [
       app.preloader.hide();
 
       resolve({
-          componentUrl: "./pages/recipes.html",
+          componentUrl: "./pages/recipes/letter/search.html",
         },
         {
           props: {
             paramLetter: to.params.letter,
             recipes: await getRecipesByLetter(to.params.letter)
+          }
+        });
+    }
+  },
+  {
+    path: '/recipes/category',
+    async: async function ({ router, to, resolve }) {
+      // App instance
+      var app = router.app;
+      app.preloader.show();
+      app.preloader.hide();
+
+      resolve({
+          componentUrl: "./pages/recipes/category/search.html",
+        },
+        {
+          props: {
+            categories: await getCategories(),
+          }
+        });
+    }
+  },
+  {
+    path: '/recipes/category/:category',
+    async: async function ({ router, to, resolve }) {
+      var app = router.app;
+      app.preloader.show();
+      app.preloader.hide();
+
+      resolve({
+          componentUrl: "./pages/recipes/category/search.html",
+        },
+        {
+          props: {
+            paramCategory: to.params.category,
+            recipes: await getRecipesByCategory(to.params.category)
           }
         });
     }
