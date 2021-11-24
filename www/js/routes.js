@@ -2,7 +2,7 @@
 var routes = [
   {
     path: '/',
-    url: './index.html',  
+    url: './index.html',
   },
   {
     path: '/about/',
@@ -11,6 +11,24 @@ var routes = [
   {
     path: '/shop',
     url: './pages/shop.html',
+
+    async: function () {
+      app.request({
+        url: "https://www.themealdb.com/api/json/v1/1/search.php?f=b",
+        method: "GET",
+        dataType: "json",
+        beforeSend: function () {
+          app.preloader.show();
+        },
+        success: function (data) {
+          app.preloader.hide();
+          for (let index = 0; index < 1; index++) {
+            console.log(data)
+            console.log(data.meals)
+          }
+        },
+      })
+    }
   },
   {
     path: '/basket',
