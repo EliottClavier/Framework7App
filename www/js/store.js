@@ -11,7 +11,7 @@ const store = createStore({
     }
   },
   actions: {
-    addProduct({ state }, recipe) {
+    addRecipe({ state }, recipe) {
       state.recipes = [...state.recipes, recipe];
     }
   },
