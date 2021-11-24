@@ -70,6 +70,10 @@
   export default (props, { $store }) => {
     let { recipes, paramLetter } = props;
 
+    if(paramLetter){
+      $store.dispatch('putLastLetter', paramLetter);
+    }
+
     let letters = [
       "A",
       "B",

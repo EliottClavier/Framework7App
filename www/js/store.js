@@ -3,11 +3,15 @@
 var createStore = Framework7.createStore;
 const store = createStore({
   state: {
-    recipes: []
+    recipes: [],
+    lastLetter: null,
   },
   getters: {
     recipes({ state }) {
       return state.recipes;
+    },
+    lastLetter({state}){
+      return state.lastLetter;
     }
   },
   actions: {
@@ -20,7 +24,9 @@ const store = createStore({
       }else{
         state.recipes = [...state.recipes, recipe];
       }
-
+    },
+    putLastLetter({state}, letter){
+      state.lastLetter = letter
     }
   },
 })
