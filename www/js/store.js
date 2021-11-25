@@ -24,7 +24,7 @@ const store = createStore({
           return u.idMeal === recipe.idMeal;
       });
       if(already != -1){
-        state.recipes.splice(already, 1);
+        state.recipes.slice(already, 1);
       }else{
         state.recipes = [...state.recipes, recipe];
       }
@@ -43,7 +43,7 @@ const store = createStore({
       state.ingredients = [];
     },
     deleteIngredient({state}, id){
-      state.ingredients.splice(id, 1);
+      state.ingredients.slice(id, 1);
     }
   },
 })
