@@ -2,29 +2,12 @@
   <div class="page" data-name="recipe-detail">
     <div class="page-content" style="padding-top: 0">
       <div>
-        <div class="navbar">
-          <div class="navbar-bg"></div>
-          <div class="navbar-inner">
-            <div class="title">Catalogue</div>
-          </div>
-        </div>
+        <div innerHTML="${buildNavbar()}"></div>
 
         <div class="list media-list" style="margin: 0">
           <ul>
             ${categories && categories.map((cat) => $h`
-            <li>
-              <a href="/recipes/category/${cat.strCategory}" class="item-link item-content" style="font-size: 1em">
-                <div class="item-media">
-                  <img src="${cat.strCategoryThumb}" width="80" />
-                </div>
-                <div class="item-inner">
-                  <div class="item-title-row">
-                    <div class="item-title">${cat.strCategory}</div>
-                  </div>
-                  <div class="item-text">${cat.strCategoryDescription}</div>
-                </div>
-              </a>
-            </li>
+              <li innerHTML="${buildCategoryContainer(cat)}"></li>
             `)}
           </ul>
         </div>
@@ -33,28 +16,12 @@
       <div class="list media-list" style="margin: 0">
         <ul>
           ${recipes && recipes.map((recipe) => $h`
-            <li>
-              <a href="/recipe/${recipe.idMeal}" class="item-link item-content" style="font-size: 1em">
-                <div class="item-media">
-                  <img src="${recipe.strMealThumb}" width="80" />
-                </div>
-                <div class="item-inner">
-                  <div class="item-title-row">
-                    <div class="item-title">${recipe.strMeal}</div>
-                  </div>
-                </div>
-              </a>
-            </li>
+            <li innerHTML="${buildRecipeContainer(recipe)}"></li>
           `)}
         </ul>
       </div>
 
-
-      <div class="fab fab-right-bottom" style="position: fixed">
-        <a href="/recipes/letter">
-          <div class="fab-text">AB</div>
-        </a>
-      </div>
+      <div innerHTML="${buildActionButton()}"></div>
     </div>
   </div>
 </template>
@@ -62,6 +29,59 @@
 <script>
   export default (props, { $store }) => {
     let { categories, recipes } = props;
+
+    const buildNavbar = () => {
+      return `
+        <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner">
+                <div class="title">Catalogue - Par catégorie</div>
+            </div>
+        </div>
+      `
+    }
+
+    const buildCategoryContainer = (cat) => {
+      return `
+        <a href="/recipes/category/${cat.strCategory}" class="item-link item-content" style="font-size: 1em">
+          <div class="item-media">
+            <img src="${cat.strCategoryThumb}" width="80" />
+          </div>
+          <div class="item-inner">
+            <div class="item-title-row">
+              <div class="item-title">${cat.strCategory}</div>
+            </div>
+            <div class="item-text">${cat.strCategoryDescription}</div>
+          </div>
+        </a>
+      `
+    }
+
+    const buildRecipeContainer = (recipe) => {
+      return `
+        <a href="/recipe/${recipe.idMeal}" class="item-link item-content" style="font-size: 1em">
+          <div class="item-media">
+            <img src="${recipe.strMealThumb}" width="80" />
+          </div>
+          <div class="item-inner">
+            <div class="item-title-row">
+              <div class="item-title">${recipe.strMeal}</div>
+            </div>
+          </div>
+        </a>
+      `
+    }
+
+    const buildActionButton = () => {
+      return `
+        <div class="fab fab-right-bottom" style="position: fixed">
+          <a href="/recipes/letter">
+            <div class="fab-text">AB</div>
+          </a>
+        </div>
+      `
+    }
+
     return $render;
   };
 </script>
