@@ -1,10 +1,16 @@
 var routes = [
   {
     path: '/',
+    options: {
+      transition: 'f7-parallax'
+    },
     url: './index.html',
   },
   {
     path: '/recipes/letter',
+    options: {
+      transition: 'f7-parallax'
+    },
     async: function ({ router, to, resolve }) {
       // App instance
       var app = router.app;
@@ -23,6 +29,9 @@ var routes = [
   },
   {
     path: '/recipes/letter/:letter',
+    options: {
+      transition: 'f7-parallax'
+    },
     async: async function ({ router, to, resolve }) {
       var app = router.app;
       app.preloader.show();
@@ -41,6 +50,9 @@ var routes = [
   },
   {
     path: '/recipes/category',
+    options: {
+      transition: 'f7-parallax'
+    },
     async: async function ({ router, to, resolve }) {
       // App instance
       var app = router.app;
@@ -59,6 +71,9 @@ var routes = [
   },
   {
     path: '/recipes/category/:category',
+    options: {
+      transition: 'f7-parallax'
+    },
     async: async function ({ router, to, resolve }) {
       var app = router.app;
       app.preloader.show();
@@ -77,6 +92,9 @@ var routes = [
   },
   {
     path: '/favoris',
+    options: {
+      transition: 'f7-parallax'
+    },
     async: function ({ router, to, resolve }) {
       var app = router.app;
       app.preloader.show();
@@ -89,6 +107,9 @@ var routes = [
   },
   {
     path: '/ingredients',
+    options: {
+      transition: 'f7-parallax'
+    },
     async: function ({ router, to, resolve }) {
       var app = router.app;
       app.preloader.show();
@@ -101,6 +122,9 @@ var routes = [
   },
   {
     path: '/recipe/:recipeId',
+    options: {
+      transition: 'f7-parallax'
+    },
     async: async function ({ router, to, resolve }) {
       var app = router.app;
       app.preloader.show();
