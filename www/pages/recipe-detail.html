@@ -14,9 +14,9 @@
                 <div>
                     <div style="display: flex; justify-content: space-between;">
                         <h2 style="margin: 1em"><i class="icon f7-icons color-black">poultry_leg</i><span style="margin-left: 1em">Ingrédients</span></h2>
-                        <div>
+                        <div style="display: flex;">
                             <h2 style="margin: 1em"><i class="icon f7-icons color-red" @click=${addFav}>${fav ? `heart_fill` : `heart`}</i></h2>
-                            <h2 style="margin: 1em"><i class="icon f7-icons color-black" @click=${addIngredient}>cart</i></h2>
+                            <h2 style="margin: 1em" class="open-alert"><i class="icon f7-icons color-black" @click=${addIngredient}>cart</i></h2>
                         </div>
 
                     </div>
@@ -52,7 +52,7 @@
     </div>
 </template>
 <script>
-  export default (props, {$store, $update, $router}) => {
+  export default (props, {$store, $update, $router, $f7, $on}) => {
     const formatIngredientMeasure = (recipe) => {
       let array = [];
       let i = 1;
@@ -89,6 +89,12 @@
     }
 
     let ingredients = formatIngredientMeasure(recipe);
+
+    $on('pageInit', () => {
+      $('.open-alert').on('click', function () {
+        $f7.dialog.alert('Ingrédients ajoutés à votre panier!');
+      });
+    });
 
     return $render;
   };

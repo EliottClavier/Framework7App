@@ -10,8 +10,11 @@
             <div class="list">
                 <ul>
                 ${ingredients.value && ingredients.value.length ? $h`
+                    <div style="display: flex; justify-content: center;">
+                        <i class="icon f7-icons color-black" @click="${trash}">trash</i>
+                    </div>
                     ${ingredients.value.map((ingredient) => $h`
-                        <li>
+                        <li class="swipeout">
                             <label class="item-checkbox item-content">
                                 <input type="checkbox" name="i${ingredient[1]}" value="${ingredient[2]}" checked=${ingredient[2]} />
                                 <i class="icon icon-checkbox"></i>
@@ -19,8 +22,11 @@
                                     <div class="item-title">${ingredient[0]}</div>
                                 </div>
                             </label>
+                            <div class="swipeout-actions-right">
+                                <a href="#" data-confirm="Are you sure you want to delete this item?"
+                                class="swipeout-delete" @click="${() => {deleteIngredient(ingredient[1])}}">Delete</a>
+                            </div>
                         </li>
-                        <hr />
                     `)}
                 ` : $h`
                     <div style="font-size: 2rem; text-align: center; margin-top: 5vh">Pas d'ingrédients ajouté à votre panier.</div>
@@ -37,6 +43,15 @@
         const check = (id) => {
             $store.dispatch('updateIngredient', id);
             $update();
+        }
+
+        const trash = () => {
+            $store.dispatch('trash');
+            $update();
+        }
+
+        const deleteIngredient = (id) => {
+            $store.dispatch('deleteIngredient', id);
         }
 
         $on('pageInit', () => {
