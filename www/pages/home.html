@@ -1,0 +1,93 @@
+<template>
+
+  <div class="page">
+    <div class="navbar">
+      <div class="navbar-bg"></div>
+      <div class="navbar-inner">
+        <div class="title">Accueil</div>
+        <div class="subnavbar">
+          <form class="searchbar">
+            <div class="searchbar-inner">
+              <div class="searchbar-input-wrap">
+                <input type="search" placeholder="Rechercher une recette" />
+                <i class="searchbar-icon"></i>
+                <span class="input-clear-button"></span>
+              </div>
+              <span class="searchbar-disable-button if-not-aurora">Annuler</span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="page-content">
+      <div class="searchbar-backdrop"></div>
+      <div class="list searchbar-found media-list" style="margin: 0">
+        <ul>
+          ${(recipes && recipes.length) ? $h`
+            ${ recipes.map((recipe) => $h`
+              <li innerHTML="${buildRecipeContainer(recipe)}"></li>
+            `)} 
+          `: $h`
+            <div class="page-content display-flex flex-direction-column" style="padding-top: 0">
+              <div class="justify-content-center text-align-center">
+                  <p style="font-size: 1em; font-style: italic;">Vos recettes s'afficheront ici</p>
+              </div>
+            </div>
+          `}
+        </ul>
+      </div>
+      <div class="block searchbar-not-found">
+        <div class="block-inner">La recette recherchée n'est pas disponible</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+    export default (props, {
+        $f7,
+        $on,
+        $update
+    }) => {
+        let recipes = [];
+
+        const buildRecipeContainer = (recipe) => {
+            return `
+        <a href="/recipe/${recipe.idMeal}" class="item-link item-content" style="font-size: 1em">
+            <div class="item-media">
+                <img src="${recipe.strMealThumb}" width="80"/>
+            </div>
+            <div class="item-inner">
+                <div class="item-title-row">
+                    <div class="item-title">${recipe.strMeal}</div>
+                </div>
+                <div class="item-subtitle">${recipe.strCategory}</div>
+                <div class="item-text">${recipe.strInstructions}</div>
+            </div>
+        </a>
+      `
+        }
+
+        $on('pageInit', () => {
+            // create searchbar
+            var searchbar = $f7.searchbar.create({
+                el: '.searchbar',
+                searchContainer: '.list',
+                searchIn: '.item-title',
+                on: {
+                    async search(sb, query, previousQuery) {
+                        recipes = await getRecipesBySearch(query);
+                        if (!recipes) {
+                            recipes = [];
+                        }
+                        $update();
+                    }
+                }
+            });
+        })
+
+
+
+        return $render;
+    }
+</script>
