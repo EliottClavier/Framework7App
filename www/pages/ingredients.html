@@ -1,12 +1,25 @@
 <template>
-    <div class="page">
-        <ul class="categories-list">
-            ${ingredients.value.map((ingredient) => $h`
-                <li class="badge color-gray" style="padding: 1.5em; margin: 0.5em">
-                    <p style="font-size: 1.2rem">${ingredient}</p>
-                </li>
-            `)}
-        </ul>
+    <div class="page" data-name="ingredients">
+        
+        <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner">
+            <div class="title">Ingrédients</div>
+            </div>
+        </div>
+        ${ingredients.value && ingredients.value.length ? $h`
+            <ul class="categories-list">
+                ${ingredients.value.map((ingredient) => $h`
+                    <li class="badge color-gray" style="padding: 1.5em; margin: 0.5em">
+                        <p style="font-size: 1.2rem">${ingredient}</p>
+                    </li>
+                `)}
+            </ul>
+        ` : $h`
+        <div style="font-size: 2rem; text-align: center; margin-top: 10vh">Pas d'ingrédients ajouté à votre panier.</div>
+        <a class="button back" href="/recipes">Retour à la liste des recettes</a>
+
+        `}
     </div>
 </template>
 <script>

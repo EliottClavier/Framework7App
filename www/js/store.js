@@ -20,8 +20,9 @@ const store = createStore({
   },
   actions: {
     addRecipe({ state }, recipe) {
-      const newRecipe = (recipe) => recipe == recipe;
-      const already = state.recipes.findIndex(newRecipe);
+      const already = state.recipes.findIndex((u) => {
+          return u.idMeal === recipe.idMeal;
+      });
       if(already != -1){
         state.recipes = state.recipes.splice(0, already);
       }else{

@@ -88,6 +88,18 @@ var routes = [
     },
   },
   {
+    path: '/ingredients',
+    async: function ({ router, to, resolve }) {
+      var app = router.app;
+      app.preloader.show();
+      app.preloader.hide();
+
+      resolve({
+          componentUrl: "./pages/ingredients.html",
+      });
+    },
+  },
+  {
     path: '/recipe/:recipeId',
     async: async function ({ router, to, resolve }) {
       var app = router.app;
