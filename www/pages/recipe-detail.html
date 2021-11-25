@@ -8,13 +8,16 @@
                     <h2 style="left: 2vw; top: 12vw; position: absolute; margin: 0">
                         <em>${recipe.strCategory}</em>
                     </h2>
-                    <a href="/recipes/${lastLetter}" style="right: 2vh; top: 2vh; position: absolute; margin: 0"><i class="icon f7-icons color-black">multiply_circle_fill</i></a>
+                    <a class="back" style="right: 2vh; top: 2vh; position: absolute; margin: 0"><i class="icon f7-icons color-black">multiply_circle_fill</i></a>
                 </div>
 
                 <div>
                     <div style="display: flex; justify-content: space-between;">
                         <h2 style="margin: 1em"><i class="icon f7-icons color-black">poultry_leg</i><span style="margin-left: 1em">Ingrédients</span></h2>
-                        <h2 style="margin: 1em"><i class="icon f7-icons color-red" @click=${addFav}>${fav ? `heart_fill` : `heart`}</i></h2>
+                        <div>
+                            <h2 style="margin: 1em"><i class="icon f7-icons color-red" @click=${addFav}>${fav ? `heart_fill` : `heart`}</i></h2>
+                            <h2 style="margin: 1em"><i class="icon f7-icons color-black" @click=${addIngredient}>cart</i></h2>
+                        </div>
 
                     </div>
                     <hr />
@@ -49,24 +52,35 @@
     </div>
 </template>
 <script>
-  export default (props, {$store, $update}) => {
+  export default (props, {$store, $update, $router}) => {
 
     const formatIngredientMeasure = (recipe) => {
       let array = [];
       let i = 1;
       while (recipe['strIngredient' + i] && recipe['strMeasure' + i]) {
-        array.push(recipe['strIngredient' + i] + ' - ' + recipe['strMeasure' + i])
+        let ing = recipe['strIngredient' + i] + ' - ' + recipe['strMeasure' + i];
+        array.push(ing)
         i++;
       }
       return array;
     }
+    let recipe = props.recipe;
     let fav = false;
-    const lastLetter = $store.getters.lastLetter.value;
-    const newRecipe = (recipe) => recipe === recipe
-    const already = $store.getters.recipes.value.findIndex(newRecipe);
+    const already = $store.getters.recipes.value.findIndex((u) => {
+        return u.idMeal === recipe.idMeal;
+    });
     if(already != -1){
         fav = true;
         $update();
+    }
+    
+    const addIngredient = () => {
+        let i = 1;
+        while (recipe['strIngredient' + i] && recipe['strMeasure' + i]) {
+            let ing = recipe['strIngredient' + i] + ' - ' + recipe['strMeasure' + i];
+            $store.dispatch('addIngredient', ing);
+            i++;
+        }
     }
 
     const addFav = () => {
@@ -75,7 +89,6 @@
       $update();
     }
 
-    let recipe = props.recipe;
     let ingredients = formatIngredientMeasure(recipe);
 
     return $render;

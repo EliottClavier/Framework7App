@@ -1,0 +1,123 @@
+<template>
+    <div class="page" data-name="recipe-detail">
+        ${(recipes && recipes.length) ? $h`
+        <div class="page-content" style="padding-top: 0">
+            <div>
+                <div innerHTML="${buildNavbar()}"></div>
+                <div data-space-between="5" data-slides-per-view="8"
+                     class="swiper-container swiper-init demo-swiper padding">
+                    <div class="swiper-wrapper">
+                        ${letters.map((letter) => $h`
+                            <div class="swiper-slide" innerHTML="${buildSwiperSlide(letter)}"></div>
+                        `)}
+                    </div>
+                </div>
+            </div>
+
+            ${recipes.map((recipe) => $h`
+                <div class="list media-list" style="margin: 0">
+                    <ul>
+                        <li innerHTML="${buildRecipeContainer(recipe)}"></li>
+                    </ul>
+                </div>
+            `)}
+            <div innerHTML="${buildActionButton()}"></div>
+
+        </div>
+        `: $h`
+
+        <div>
+            <div innerHTML="${buildNavbar()}"></div>
+            <div data-space-between="5" data-slides-per-view="8"
+                 class="swiper-container swiper-init demo-swiper padding">
+                <div class="swiper-wrapper">
+                    ${letters.map((letter) => $h`
+                        <div class="swiper-slide" innerHTML="${buildSwiperSlide(letter)}"></div>
+                    `)}
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content display-flex flex-direction-column" style="padding-top: 0">
+
+            <div class="text-align-center">
+                <h1 style="font-size: 8em">AB</h1>
+                <p style="font-size: 3em">Sélectionner une lettre</p>
+            </div>
+
+            <div innerHTML="${buildActionButton()}"></div>
+        </div>
+        `}
+
+
+    </div>
+</template>
+
+<script>
+  export default (props, {$store}) => {
+
+    let {recipes, paramLetter} = props;
+    let letters = [
+      "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
+    ];
+
+    const buildNavbar = () => {
+      return `
+        <div class="navbar">
+            <div class="navbar-bg"></div>
+            <div class="navbar-inner">
+                <div class="title">Catalogue - Par lettre</div>
+            </div>
+        </div>
+      `
+    }
+
+    const buildSwiperSlide = (letter) => {
+      return `
+        ${(paramLetter === letter) ? `
+          <a
+            style="padding: 1em; font-size: 1em"
+            class="badge color-blue">
+            ${letter}
+          </a>
+        ` : `
+          <a
+            href="/recipes/letter/${letter}"
+            style="padding: 1em; font-size: 1em"
+            class="badge">
+            ${letter}
+          </a>
+        `}
+      `
+    }
+
+    const buildRecipeContainer = (recipe) => {
+      return `
+        <a href="/recipe/${recipe.idMeal}" class="item-link item-content" style="font-size: 1em">
+            <div class="item-media">
+                <img src="${recipe.strMealThumb}" width="80"/>
+            </div>
+            <div class="item-inner">
+                <div class="item-title-row">
+                    <div class="item-title">${recipe.strMeal}</div>
+                </div>
+                <div class="item-subtitle">${recipe.strCategory}</div>
+                <div class="item-text">${recipe.strInstructions}</div>
+            </div>
+        </a>
+      `
+    }
+
+    const buildActionButton = () => {
+      return `
+        <div class="fab fab-right-bottom" style="position: fixed">
+          <a href="/recipes/category">
+            <div class="fab-text"><i class="icon f7-icons color-white tab-link">list_bullet</i></div>
+          </a>
+        </div>
+        `
+    }
+
+    return $render;
+  };
+</script>
