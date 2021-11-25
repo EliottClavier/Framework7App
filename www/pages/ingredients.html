@@ -1,0 +1,18 @@
+<template>
+    <div class="page">
+        <ul class="categories-list">
+            ${ingredients.value.map((ingredient) => $h`
+                <li class="badge color-gray" style="padding: 1.5em; margin: 0.5em">
+                    <p style="font-size: 1.2rem">${ingredient}</p>
+                </li>
+            `)}
+        </ul>
+    </div>
+</template>
+<script>
+    export default (props, {$store}) => {
+        const ingredients = $store.getters.ingredients;
+
+        return $render;
+    }
+</script>
