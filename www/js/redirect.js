@@ -1,1 +1,0 @@
-f7router.navigate('/home');
