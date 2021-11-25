@@ -5,7 +5,7 @@ const store = createStore({
   state: {
     recipes: [],
     lastLetter: null,
-    ingredients: [],
+    ingredients: []
   },
   getters: {
     recipes({ state }) {
@@ -33,7 +33,11 @@ const store = createStore({
       state.lastLetter = letter;
     },
     addIngredient({state}, ingredient) {
-      state.ingredients = [...state.ingredients, ingredient];
+      let ing = [ingredient, state.ingredients.length, false];
+      state.ingredients = [...state.ingredients, ing];
+    },
+    updateIngredient({state}, id) {
+      state.ingredients[id][2] = !state.ingredients[id][2];
     }
   },
 })

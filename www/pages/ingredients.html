@@ -1,31 +1,58 @@
 <template>
     <div class="page" data-name="ingredients">
-        
         <div class="navbar">
             <div class="navbar-bg"></div>
             <div class="navbar-inner">
             <div class="title">Ingrédients</div>
             </div>
         </div>
-        ${ingredients.value && ingredients.value.length ? $h`
-            <ul class="categories-list">
-                ${ingredients.value.map((ingredient) => $h`
-                    <li class="badge color-gray" style="padding: 1.5em; margin: 0.5em">
-                        <p style="font-size: 1.2rem">${ingredient}</p>
-                    </li>
-                `)}
-            </ul>
-        ` : $h`
-        <div style="font-size: 2rem; text-align: center; margin-top: 10vh">Pas d'ingrédients ajouté à votre panier.</div>
-        <a class="button back" href="/recipes">Retour à la liste des recettes</a>
-
-        `}
+        <div class="page-content">
+            <div class="list">
+                <ul>
+                ${ingredients.value && ingredients.value.length ? $h`
+                    ${ingredients.value.map((ingredient) => $h`
+                        <li>
+                            <label class="item-checkbox item-content">
+                                <input type="checkbox" name="i${ingredient[1]}" value="${ingredient[2]}" checked=${ingredient[2]} />
+                                <i class="icon icon-checkbox"></i>
+                                <div class="item-inner">
+                                    <div class="item-title">${ingredient[0]}</div>
+                                </div>
+                            </label>
+                        </li>
+                        <hr />
+                    `)}
+                ` : $h`
+                    <div style="font-size: 2rem; text-align: center; margin-top: 5vh">Pas d'ingrédients ajouté à votre panier.</div>
+                    <a class="button back" href="/recipes">Retour à la liste des recettes</a>
+                `}
+                </ul>
+            </div>
+        </div>
     </div>
 </template>
 <script>
-    export default (props, {$store}) => {
+    export default (props, {$store, $update, $on}) => {
         const ingredients = $store.getters.ingredients;
+        const check = (id) => {
+            $store.dispatch('updateIngredient', id);
+            $update();
+        }
+
+        $on('pageInit', () => {
+            ingredients.value.forEach(ing => {
+                $('[name=i'+ing[1]+']').on('change', function (e) {
+                    check(ing[1]);
+                });
+            });
+        })
 
         return $render;
     }
 </script>
+<style>
+    button:active{
+        border-style: outset;
+        box-shadow: none;
+    }
+</style>
