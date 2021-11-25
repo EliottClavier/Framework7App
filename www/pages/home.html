@@ -21,23 +21,20 @@
     </div>
     <div class="page-content">
       <div class="searchbar-backdrop"></div>
-      <div class="list searchbar-found media-list" style="margin: 0">
+      <div class="list media-list" style="margin: 0">
         <ul>
           ${(recipes && recipes.length) ? $h`
-            ${ recipes.map((recipe) => $h`
+            ${recipes.map((recipe) => $h`
               <li innerHTML="${buildRecipeContainer(recipe)}"></li>
             `)}
           `: $h`
             <div class="page-content display-flex flex-direction-column" style="padding-top: 0">
               <div class="justify-content-center text-align-center">
-                  <p style="font-size: 1em; font-style: italic;">Vos recettes s'afficheront ici</p>
+                  <p style="font-size: 1em; font-style: italic;">Aucune recette à afficher</p>
               </div>
             </div>
           `}
         </ul>
-      </div>
-      <div class="block searchbar-not-found">
-        <div class="block-inner">La recette recherchée n'est pas disponible</div>
       </div>
     </div>
   </div>
