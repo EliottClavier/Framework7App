@@ -4,6 +4,42 @@ var routes = [
     url: './index.html',
   },
   {
+    path: '/home',
+    async: function ({ router, to, resolve }) {
+      // App instance
+      var app = router.app;
+      app.preloader.show();
+      app.preloader.hide();
+
+      resolve({
+        componentUrl: "./pages/home.html",
+      },
+        {
+          props: {
+            search: []
+          }
+        });
+    }
+  },
+  {
+    path: '/home/:search',
+    async: async function ({ router, to, resolve }) {
+      var app = router.app;
+      app.preloader.show();
+      app.preloader.hide();
+
+      resolve({
+        componentUrl: "./pages/home.html",
+      },
+        {
+          props: {
+            paramSearch: to.params.search,
+            search: await getRecipesBySearch(to.params.search)
+          }
+        });
+    }
+  },
+  {
     path: '/recipes',
     async: function ({ router, to, resolve }) {
       // App instance
@@ -29,8 +65,8 @@ var routes = [
       app.preloader.hide();
 
       resolve({
-          componentUrl: "./pages/recipes.html",
-        },
+        componentUrl: "./pages/recipes.html",
+      },
         {
           props: {
             paramLetter: to.params.letter,
@@ -47,7 +83,7 @@ var routes = [
       app.preloader.hide();
 
       resolve({
-          componentUrl: "./pages/favoris.html",
+        componentUrl: "./pages/favoris.html",
       });
     },
   },
@@ -59,7 +95,8 @@ var routes = [
       app.preloader.hide();
 
       resolve({
-          componentUrl: "./pages/recipe-detail.html",},
+        componentUrl: "./pages/recipe-detail.html",
+      },
         {
           props: {
             recipe: await getRecipeById(to.params.recipeId),

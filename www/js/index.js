@@ -29,3 +29,19 @@ const getRecipesByLetter = async (letter) => {
       }
     );
 };
+
+const getRecipesBySearch = async (search) => {
+  // Requête GET
+  return await app.request.get(
+    `https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`
+  )
+    .then(
+      r => {
+        return JSON.parse(r.data).meals;
+      },
+      err => {
+        console.log(err);
+        return null;
+      }
+    );
+};
