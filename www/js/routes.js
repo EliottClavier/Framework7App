@@ -1,13 +1,6 @@
-var routes = [{
-  path: '/',
-  options: {
-    transition: 'f7-parallax'
-},
-  componentUrl: 'pages/home.html',
-  name: 'home'
-},
+var routes = [
 {
-  path: '/home',
+  path: '/',
   options: {
     transition: 'f7-parallax'
 },
@@ -22,26 +15,6 @@ var routes = [{
       }, {
           props: {
               search: []
-          }
-      });
-  }
-},
-{
-  path: '/home/:search',
-  options: {
-    transition: 'f7-parallax'
-},
-  async: async function({ router, to, resolve }) {
-      var app = router.app;
-      app.preloader.show();
-      app.preloader.hide();
-
-      resolve({
-          componentUrl: "./pages/home.html",
-      }, {
-          props: {
-              paramSearch: to.params.search,
-              search: await getRecipesBySearch(to.params.search)
           }
       });
   }

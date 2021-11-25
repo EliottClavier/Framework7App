@@ -26,7 +26,7 @@
           ${(recipes && recipes.length) ? $h`
             ${ recipes.map((recipe) => $h`
               <li innerHTML="${buildRecipeContainer(recipe)}"></li>
-            `)} 
+            `)}
           `: $h`
             <div class="page-content display-flex flex-direction-column" style="padding-top: 0">
               <div class="justify-content-center text-align-center">
@@ -76,11 +76,12 @@
                 searchIn: '.item-title',
                 on: {
                     async search(sb, query, previousQuery) {
-                        recipes = await getRecipesBySearch(query);
-                        if (!recipes) {
-                            recipes = [];
-                        }
-                        $update();
+                        await getRecipesBySearch(query).then(
+                            (r) => {
+                              recipes = r;
+                              $update();
+                            }
+                        );
                     }
                 }
             });
