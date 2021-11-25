@@ -29,3 +29,35 @@ const getRecipesByLetter = async (letter) => {
       }
     );
 };
+
+const getCategories = async () => {
+  // Requête GET
+  return await app.request.get(
+    `https://www.themealdb.com/api/json/v1/1/categories.php`
+  )
+    .then(
+      r => {
+        return JSON.parse(r.data).categories;
+      },
+      err => {
+        console.log(err);
+        return null;
+      }
+    );
+}
+
+const getRecipesByCategory = async (category) => {
+  // Requête GET
+  return await app.request.get(
+    `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`
+  )
+    .then(
+      r => {
+        return JSON.parse(r.data).meals;
+      },
+      err => {
+        console.log(err);
+        return null;
+      }
+    );
+}
