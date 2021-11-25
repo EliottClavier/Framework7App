@@ -1,6 +1,7 @@
 var routes = [{
         path: '/',
-        url: './pages/home.html',
+        componentUrl: 'pages/home.html',
+        name: 'home'
     },
     {
         path: '/home',
